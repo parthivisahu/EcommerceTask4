@@ -1,5 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// import { FC } from 'react';
 document.addEventListener("DOMContentLoaded", function () {
     var urlParams = new URLSearchParams(window.location.search);
     var productId = urlParams.get('id');
@@ -14,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
     else {
-        // Handle the case where no product ID is provided
         alert("Invalid product ID.");
     }
 });

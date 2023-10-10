@@ -28,13 +28,13 @@ function addToCart(productID, productName, productPrice, productCategory, produc
     else {
         cart.push({
             id: productID,
-            title: "",
             name: productName,
             price: productPrice,
             category: productCategory,
             description: productDescription,
             image: productImage,
-            quantity: 1
+            quantity: 1,
+            title: ""
         });
     }
     localStorage.setItem('cart', JSON.stringify(cart));
