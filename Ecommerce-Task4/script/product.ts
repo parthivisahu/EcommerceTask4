@@ -5,18 +5,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const productId: string | null = urlParams.get('id');
 
     if (productId) {
-        
         fetch(`https://fakestoreapi.com/products/${productId}`)
-        .then(res => res.json())
-        .then((data: Product) => {
-            displayProductDetails(data);
-        })
-        .catch((error: Error) => {
-            console.error("Error fetching product:", error);
-        });
-
+            .then(res => res.json())
+            .then((data: Product) => {
+                displayProductDetails(data);
+            })
+            .catch((error: Error) => {
+                console.error("Error fetching product:", error);
+            });
     } else {
-        
+        // Handle the case where no product ID is provided
         alert("Invalid product ID.");
     }
 });
@@ -33,22 +31,21 @@ function displayProductDetails(product: Product) {
     const productDetailContainer: HTMLElement | null = document.getElementById('product-detail');
 
     if (productDetailContainer) {
-        const productDetailContainer: HTMLElement | null = document.getElementById('product-detail');
-
-        if (productDetailContainer) {
-            productDetailContainer.innerHTML = `
-            <div class="card text-bg-dark mb-3" >
-                <img src="${product.image}" class="card-img" alt="${product.title}">
-                <div class="card-img-overlay">
-                    <h5 class="card-title">${product.title}</h5>
-                    <p class="card-text">${product.description}</p>
-                    <p class="card-text"><small>Price: ₹${product.price}</small></p>
-                    <button class="btn-cart" onclick="addToCart('${product.title}', ${product.price}, '${product.image}')">Add to Cart</button>
-                </div>
+        productDetailContainer.innerHTML = `
+        <div class="prod-page-card">
+            <div class="prod-page-img">
+                <img src="${product.image}" alt="${product.title}" class="img-fluid">
             </div>
-            `;
-        }
-        
+            <div class="prod-page-details">
+                <h2 style="margin: 5px 0px 20px 0px">${product.title}</h2>
+                <p>${product.description}</p>
+                <p style="margin: 5px 0px 20px 0px"><strong>Price: ₹${product.price}</strong></p>
+                <p><strong>Category: ${product.category}</strong></p>
+                <button class="btn-cart" onclick="addToCart('${product.title}', ${product.price}, '${product.image}')">Add to Cart</button>
+            </div>
+            </div>
+        `;
+    }
 }
 
 function addToCart(productName: string, productPrice: number, productImage: string) {

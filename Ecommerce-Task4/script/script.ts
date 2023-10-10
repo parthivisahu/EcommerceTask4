@@ -7,6 +7,7 @@ interface Product {
     image: string;
     description: string;
     name:string;
+    quantity:number;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -36,7 +37,7 @@ function displayProducts(products: Product[]) {
                         
                         
                         <p><strong>Category:</strong> ${product.category}</p>
-                        <p><strong>Price:</strong> ₹${product.price*100}</p>
+                        <p><strong>Price:</strong> ₹${product.price}</p>
 
                         <button class="btn-cart" onclick="addToCart(${product.id}, '${product.title}', ${product.price}, '${product.category}', '${product.description}', '${product.image}')">Add to Cart</button>
 

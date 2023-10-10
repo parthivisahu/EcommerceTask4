@@ -96,22 +96,14 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-.btn-cart {
-    background-color: #0000001a;
-    border: none;
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: 600;
-    font-family: 'Montserrat', sans-serif;
-}
 
-.btn-cart:hover {
-    background-color: #000000a1;
-    color: #ffffff;
-    transform: scale(1.01);
+.fa-cart-shopping:hover {
+    color: rgb(184, 244, 244);
+    transform: scale(1.14);
     transition: transform .1s;
     font-weight: 700;
 }
+
 
 a {
     text-decoration: none;
