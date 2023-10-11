@@ -1,31 +1,77 @@
+let postsData = [];
+const postsContainer = document.querySelector(".posts-container");
+const searchDisplay = document.querySelector(".search-display");
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     fetch('https://fakestoreapi.com/products')
-        .then(function (res) { return res.json(); })
-        .then(function (data) {
-        displayProducts(data);
-    })
-        .catch(function (error) {
-        console.error("Error fetching products:", error);
-    });
+        .then(res => res.json())
+        .then(data => {
+            postsData = data;
+            displayProducts(data);
+        })
+        .catch(error => {
+            console.error("Error fetching products:", error);
+        });
 });
+
 function displayProducts(products) {
-    var productsContainer = document.getElementById('products');
-    products.forEach(function (product) {
-        var productDiv = document.createElement('div');
+
+
+    console.log('products to display = ',products);
+
+
+    
+    const productsContainer = document.getElementById('products');
+
+    const productsCatalogue = document.getElementsByClassName('catalogue');
+
+    console.log('productsContainer',productsContainer,products);
+
+    console.log('productsContainer',productsContainer.children.length,products.length);
+    
+    products.forEach(product => {
+
+
+        let productDiv = document.createElement('div');
+
         productDiv.className = 'prod';
-        productDiv.innerHTML = "\n            <div class=\"card\">\n                <a href=\"product.html?id=".concat(product.id, "\">\n                    <img src=\"").concat(product.image, "\" alt=\"").concat(product.title, "\" class=\"card-img-top\">\n                    <div class=\"card-body\">\n                        <h5 class=\"card-title\">").concat(product.title, "</h5>\n                        \n                        \n                        <p><strong>Category:</strong> ").concat(product.category, "</p>\n                        <p><strong>Price:</strong> \u20B9").concat(product.price, "</p>\n\n                        <button class=\"btn-cart\" onclick=\"addToCart(").concat(product.id, ", '").concat(product.title, "', ").concat(product.price, ", '").concat(product.category, "', '").concat(product.description, "', '").concat(product.image, "')\">Add to Cart</button>\n\n                    </div>\n                </a>\n            </div>\n        ");
-        if (productsContainer) {
-            productsContainer.appendChild(productDiv);
-        }
+
+        productDiv.innerHTML = `
+            <div class="card">
+                <a href="product.html?id=${product.id}">
+                    <img src="${product.image}" alt="${product.title}" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">${product.title}</h5>
+                        
+                        
+                        <p><strong>Category:</strong> ${product.category}</p>
+                        <p><strong>Price:</strong> ₹${product.price}</p>
+
+                        <button class="btn-cart" onclick="addToCart(${product.id}, '${product.title}', ${product.price}, '${product.category}', '${product.description}', '${product.image}')">Add to Cart</button>
+
+                    </div>
+                </a>
+            </div>
+        `;
+
+        productsContainer.appendChild(productDiv);
     });
+
+    console.log('productsContainer',productsContainer.children.length);
 }
+
+
+
+
 function addToCart(productID, productName, productPrice, productCategory, productDescription, productImage) {
-    var cart = JSON.parse(localStorage.getItem('cart')) || [];
-    var productIndex = cart.findIndex(function (item) { return item.id === productID; });
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let productIndex = cart.findIndex(item => item.id === productID);
+
     if (productIndex !== -1) {
         cart[productIndex].quantity += 1;
-    }
-    else {
+    } else {
         cart.push({
             id: productID,
             name: productName,
@@ -33,10 +79,17 @@ function addToCart(productID, productName, productPrice, productCategory, produc
             category: productCategory,
             description: productDescription,
             image: productImage,
-            quantity: 1,
-            title: ""
+            quantity: 1
         });
     }
+
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert("".concat(productName, " added to cart."));
+    alert(`${productName} added to cart.`);
 }
+
+
+
+
+
+
+

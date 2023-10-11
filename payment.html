@@ -75,7 +75,7 @@
             <img src="https://erepublic.brightspotcdn.com/dims4/default/f4b84a8/2147483647/strip/true/crop/770x374+0+69/resize/1440x700!/quality/90/?url=http%3A%2F%2Ferepublic-brightspot.s3.us-west-2.amazonaws.com%2Faa%2F6b%2F1a5404996431a2071cf7a016cadf%2Fshutterstock-cash-payments.jpg" width="100%" height="40%">
         </div>
         <div class="total">
-            <form id="payment-form">
+            <form id="payment-form" action="" method="POST">
                 <div class="card-detail">
                     <label for="card-number">Card Number:</label>
                     <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX">
@@ -90,10 +90,27 @@
                 </div>
                 <div>
                     <button class="btn-cart" type="button" onclick="processPayment()">Pay Now</button>
+                    <script
+                    src="https://checkout.razorpay.com/v1/checkout.js"
+                    data-key="rzp_test_AR9MMPJqplssHO" 
+                    data-amount="29900" 
+                    data-currency="INR"
+                    data-id="JXEX7C8zPvMpw1etRkR1cCVF"
+                    data-buttontext="Pay with Razorpay"
+                    data-name="Shopsiee"
+                    data-description="Happy Shopping "
+                    data-image=""
+                    data-prefill.name="Shopsiee"
+                    data-prefill.email="Shopsiee@example.com"
+                    data-theme.color="#F37254"
+                    ></script>
+                    <input type="hidden" custom="Hidden Element" name="hidden"/>
                 </div>
             </form>
         </div>
     </section>
 </body>
 
+  
+  
 </html>
